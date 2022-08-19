@@ -22,6 +22,7 @@ p {
 }
 
 .search-container {
+    z-index: 1;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
