@@ -15,8 +15,8 @@ let simpleLightBox;
 const perPage = 40;
 
 searchForm.addEventListener('submit', onSearchForm);
-loadMoreBtn.addEventListener('click', onLoadMoreBtn);
-// window.addEventListener('scroll', onScroll);
+// loadMoreBtn.addEventListener('click', onLoadMoreBtn);
+window.addEventListener('scroll', onScroll);
 
 function onSearchForm(e) {
     e.preventDefault();
@@ -40,30 +40,30 @@ function onSearchForm(e) {
                 alertImagesFound(data);
 
                 if (data.totalHits > perPage) {
-                    loadMoreBtn.classList.remove('is-hidden');
+                    // loadMoreBtn.classList.remove('is-hidden');
                 }
             }
         })
         .catch(error => console.log(error));
 }
 
-function onLoadMoreBtn() {
-    page += 1; 
-    simpleLightBox.destroy()
-    fetchImages(query, page, perPage)
-        .then(({ data }) => {
-            renderGallery(data.hits);
-            simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+// function onLoadMoreBtn() {
+//     page += 1; 
+//     simpleLightBox.destroy()
+//     fetchImages(query, page, perPage)
+//         .then(({ data }) => {
+//             renderGallery(data.hits);
+//             simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
-            const totalPages = Math.ceil(data.totalHits / perPage);
+//             const totalPages = Math.ceil(data.totalHits / perPage);
 
-            if (page > totalPages) {
-                loadMoreBtn.classList.add('is-hidden');
-                alertEndOfSearch();
-            }
-        })
-        .catch(error => console.log(error));
-}
+//             if (page > totalPages) {
+//                 loadMoreBtn.classList.add('is-hidden');
+//                 alertEndOfSearch();
+//             }
+//         })
+//         .catch(error => console.log(error));
+// }
 
 function alertImagesFound(data) {
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
@@ -84,24 +84,18 @@ function alertEndOfSearch() {
 
 // Endless scroll
 
-// function onScroll() {
-//     const documentRect = document.documentElement.getBoundingClientRect();//координаты всего документа(всей страницы, которую скролим)
-//     if (documentRect.bottom < document.documentElement.clientHeight + 150) {//если низ документа < высоты нашего окна                
-//         page += 1; //увеличиваем страницу на 1
+// и закоментировать 43 строку 
+function onScroll() {
+    const documentRect = document.documentElement.getBoundingClientRect();
+    if (documentRect.bottom < document.documentElement.clientHeight + 150) {                
+        page += 1; 
 
-//         fetchImages(query, page, perPage)
-//             .then(({ data }) => {
-//                 renderGallery(data.hits);
-//                 simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-
-//                 const totalPages = Math.ceil(data.totalHits / perPage);//кол-во страниц округлённое до целого числа
-
-//                 if (page > totalPages) {
-//                     loadMoreBtn.classList.add('is-hidden');//добавим класс is-hidden
-//                     alertEndOfSearch();//выводим сообщение
-//                 }
-//             })
-//             .catch(error => console.log(error));
-//     }    
-// }
+        fetchImages(query, page, perPage)
+            .then(({ data }) => {
+                renderGallery(data.hits);
+                simpleLightBox = new SimpleLightbox('.gallery a').refresh();                
+            })
+            .catch(error => console.log(error));
+    }    
+}
 
