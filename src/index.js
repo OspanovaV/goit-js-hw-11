@@ -89,7 +89,7 @@ function onScroll() {
     const documentRect = document.documentElement.getBoundingClientRect();
     if (documentRect.bottom < document.documentElement.clientHeight + 150) {                
         page += 1; 
-
+        simpleLightBox.destroy()
         fetchImages(query, page, perPage)
             .then(({ data }) => {
                 renderGallery(data.hits);
