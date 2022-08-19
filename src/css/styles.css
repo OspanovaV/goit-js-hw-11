@@ -90,11 +90,13 @@ p {
     border: 2px solid rgb(241, 238, 238);
     border-radius: 10px;
     overflow: hidden;
+    transition: all 0.3s;
 }
 
 .gallery__link:hover,
 .gallery__link:focus {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);   
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16); 
+    scale: 1.1;  
 }
 
 .gallery-item {
