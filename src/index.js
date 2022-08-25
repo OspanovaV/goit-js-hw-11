@@ -57,17 +57,17 @@ const images = await fetchImages(query, page)
 }
 
 function onSearchNotification(data) {
-    if (data.totalHits === 0) {
-            Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-        }
-    if (data.totalHits >= PER_PAGE) { 
-        loadMoreBtn.classList.remove('is-hidden');
-    }
 const totalPages = Math.ceil(data.totalHits / PER_PAGE);
     if (page >= totalPages) {
         loadMoreBtn.classList.add('is-hidden');
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
         return;
-    }    
+    } 
+    if (data.totalHits === 0) {
+            Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+        }
+    if (data.totalHits >= PER_PAGE) { 
+        loadMoreBtn.classList.remove('is-hidden');
+    }   
 }
 
